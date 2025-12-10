@@ -96,8 +96,8 @@
                    {{-- Birthday --}}
    
                    <label class="label text-white">Birthday:</label>
-                   <input type="date" class="input bg-[#0009] outline-0" name="birthday" placeholder="2000-02-23" value="{{ old('birthday') }}" />
-                   @error('birthday')
+                   <input type="date" class="input bg-[#0009] outline-0" name="birthdate" placeholder="2000-02-23" value="{{ old('birthdate') }}" />
+                   @error('birthdate')
                        <small class="badge badge-error w-full mt-1 py-6">{{ $message }}</small>
                    @enderror
 

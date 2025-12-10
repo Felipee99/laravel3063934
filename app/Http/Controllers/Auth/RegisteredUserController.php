@@ -31,14 +31,13 @@ class RegisteredUserController extends Controller
     {
          // dd($request->all());
         $request->validate([
-            'document' => ['required', 'numeric', 'unique:' . User::class],
+            'document' => ['required', 'numeric', 'unique:users,document'],
             'fullname' => ['required', 'string'],
-            'gender' => ['required',],
+            'gender' => ['required'],
             'birthdate' => ['required', 'date'],
             'phone' => ['required', 'string'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-
         ]);
 
         $user = User::create([
@@ -54,8 +53,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        // Don't auto-login; redirect user to login page after successful registration
+        return redirect()->route('login')->with('message', 'Registration successful. Please login.');
     }
 }
